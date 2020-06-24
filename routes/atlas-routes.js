@@ -2,14 +2,13 @@
 
 // Dependencies
 const fetch = require("node-fetch");
-const key = require("../config/keys");
 
 // Useful constants
 const endpoint = "https://www.boardgameatlas.com/api";
 
 // Function defs
 const apiSearch = async (title) =>
-    (await fetch(`${endpoint}/search?name=${title}&client_id=${key.atlasID}`, { method: "Get" })).json();
+    (await fetch(`${endpoint}/search?name=${title}&client_id=${process.env.atlasID}`, { method: "Get" })).json();
 
 module.exports = app => {
     // Returns list of games matching given string
