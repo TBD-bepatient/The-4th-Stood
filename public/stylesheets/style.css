@@ -1,0 +1,25 @@
+
+form.signup,
+form.login {
+  margin-top: 50px;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+h2 {
+  color: white;
+}
+.gametext {
+    font-family: 'Press Start 2P', cursive;
+
+}
+.nudge {
+    position: relative;
+    top: 18px;
+}
+.minW {
+    min-width: 500px;
+}

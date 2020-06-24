@@ -1,0 +1,84 @@
+<nav class="grey darken-3">
+    <div class="nav-wrapper">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/catalog">Catalog</a></li>
+            <li><a href="/logout">logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 id="userInfo" data-id="{{id}}" class="gametext center">{{user}}</h2>
+    <div class="row">
+        <div class="col l6 m12 s12">
+            <p class="gametext">Owned Games</p>
+            <ul class="grey lighten-1">
+
+                {{#each game}}
+                {{#if this.dataValues.owned_requested}}
+                <li class="grey lighten-1">
+                    {{this.dataValues.name}}<a data-id="{{this.dataValues.id}}"
+                        class="delete right waves-effect waves-red btn-flat delete">DELETE</a>
+                </li><br>
+                {{/if}}
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col l6 m12 s12">
+            <p class="gametext">Requested Games</p>
+            <ul class="grey">
+                {{#each game}}
+                {{#unless this.dataValues.owned_requested}}
+                <li class="grey">
+                    {{this.dataValues.name}}<a data-id="{{this.dataValues.id}}"
+                        class="delete right waves-effect waves-red btn-flat delete">DELETE</a>
+                </li><br>
+                {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <p class="gametext">submit new game</p>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            <input id="game" placeholder="Game Name">
+        </div>
+        <div><button class="search nudge waves-effect waves-red btn-flat white">Search</button></div>
+    </div>
+    <div class="row">
+        <div id="typeChoice" class="input-field col s3">
+            <select>
+                <option value="" disabled selected>Requested or Owned?</option>
+                <option id="owned" data-owned="owned">Owned</option>
+                <option id="requested" data-owned="requested">Requested</option>
+            </select>
+        </div>
+        <div class="input-field col s3">
+            <a id="chosenGame" class='dropdown-trigger btn grey lighten-2 grey-text text-darken-4 minW' href='#' data-target='dropdown1'>Search a game!</a>
+
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content gameList'>
+                
+            </ul>
+            {{!-- <select id="gameChoice">
+                    <option value="" disabled selected>games</option>
+                    {{#each result}}
+                    <option data-name="{{this}}"  id="data">{{this}}</option>
+                    {{/each}}
+                </select> --}}
+        </div>
+    </div>
+    <div class="row">
+            <div><button class="send nudge waves-effect waves-red btn-flat grey darken-2"></button></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('select').formSelect();
+        $('.dropdown-trigger').dropdown();
+    });
+</script>
+<script src="js/members.js"></script>

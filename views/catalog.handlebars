@@ -1,0 +1,73 @@
+<nav class="grey darken-3">
+    <div class="nav-wrapper">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/members">User Page</a></li>
+            <li><a href="/logout">logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="gametext center">Catalog</h2>
+
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                {{!-- <div class="input-field col s3">
+                    <select id="place">
+                        <option value="" disabled selected></option>
+                        <option id="Game">Game</option>
+                        <option id="User">User</option>
+                    </select>
+                    <label class="grey-text text-lighten-5">User or Game</label>
+                </div> --}}
+                <div class="input-field col s3">
+                    <select id="type">
+                        <option value="" disabled selected></option>
+                        <option id="Owned">Owned</option>
+                        <option id="Requested">Requested</option>
+                    </select>
+                    <label class="grey-text text-lighten-5">Owned or Requested</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="search" type="text" class="validate">
+                    <label for="search">Search Term</label>
+                </div>
+            </div>
+            <div class="row">
+                <button class="search waves-effect waves-red btn-flat white">Search</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <p class="gametext">Look what we got!</p>
+            <table class="grey darken-3">
+                <thead>
+                    <tr class="grey-text text-lighten-5">
+                        <th>Game</th>
+                        <th>Min Time</th>
+                        <th>Min Players</th>
+                        <th>game type</th>
+                    </tr>
+                </thead>
+                <tbody class="grey-text text-lighten-1">
+                    {{#each game}}
+                    <tr>
+                        <td>{{this.dataValues.name}}</td>
+                        <td>{{this.dataValues.max_time}}</td>
+                        <td>{{this.dataValues.number_of_players}}</td>
+                        <td>{{this.dataValues.owned_requested}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('select').formSelect();
+    });
+</script>
+<script src="js/catalog.js"></script>
