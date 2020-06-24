@@ -20,10 +20,10 @@ $(function () {
         $.ajax("/atlas/list/" + game, {
             type: "get",
         }).then(
-            function(list){
+            function (list) {
                 $("#chosenGame").empty
                 $("#chosenGame").text("Click here to select your game!")
-                function swapGame(){
+                function swapGame() {
                     const newGame = $(this)[0].textContent
                     console.log($(this)[0].textContent)
                     $("#chosenGame").empty
@@ -35,13 +35,13 @@ $(function () {
                 $('.gameList').empty()
                 for (i = 0; i < list.length; i++) {
                     $('.gameList').append(`<li class="swap waves-effect waves-red btn-flat white">${list[i]}</li>`)
-                  };
-                  var links = $('.gameList > li');
-                  console.log(links)
-                  for (var i = 0; i < links.length; i++) {
+                };
+                var links = $('.gameList > li');
+                console.log(links)
+                for (var i = 0; i < links.length; i++) {
                     var link = links[i];
                     link.onclick = swapGame;
-                  }
+                }
             }
         );
     });
@@ -52,17 +52,17 @@ $(function () {
         const game = $("#chosenGame")[0].text;
         const userID = parseInt($("#userInfo")[0].attributes[1].value);
         let type = true
-        if( $("#typeChoice")[0].firstElementChild.firstChild.value === "Owned"){
-            type =  true
+        if ($("#typeChoice")[0].firstElementChild.firstChild.value === "Owned") {
+            type = true
         } else {
-            type =  false
+            type = false
         };
         $.ajax("/atlas/info/", {
             type: "post",
             data: {
                 title: game
             }
-        }).then(function(result){
+        }).then(function (result) {
             console.log(game);
             console.log(result[0].min_players)
             console.log(result[0].min_playtime)
@@ -72,17 +72,18 @@ $(function () {
                 type: "post",
                 data: {
                     name: game,
-                    time: result[0].min_playtime,  
+                    time: result[0].min_playtime,
                     players: result[0].min_players,
                     type: type,
                     userID: userID
-                  }
+                }
             }).then(
-                location.reload()
-                );
-            // setInterval('location.reload()', 2000);
+                // location.reload()
+                setInterval('location.reload()', 2000)
+            );
+
         });
     });
 
-    
+
 });

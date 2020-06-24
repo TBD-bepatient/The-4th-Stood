@@ -1,30 +1,43 @@
 'use strict';
 
-var fs        = require('fs');
-var path      = require('path');
+var fs = require('fs');
+var path = require('path');
 var Sequelize = require('sequelize');
-var basename  = path.basename(module.filename);
-var env       = process.env.NODE_ENV || 'development';
-var config    = require(__dirname + '/../config/config.json')[env];
-var db        = {};
+var basename = path.basename(module.filename);
+var env = process.env.NODE_ENV || 'development';
+var db = {};
 
-if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+const config = {
+  username: process.env.DB_username,
+  password: process.env.DB_password,
+  database: process.env.DB_database,
+  host: process.env.DB_host,
+  dialect: process.env.DB_dialect,
+};
+
+if (process.env.JAWSDB_URL) {
+  var sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+};
+
+// if (config.use_env_variable) {
+//   var sequelize = new Sequelize(process.env[config.use_env_variable]);
+// } else {
+//   var sequelize = new Sequelize(config.database, config.username, config.password, config);
+// }
 
 fs
   .readdirSync(__dirname)
-  .filter(function(file) {
+  .filter(function (file) {
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
-  .forEach(function(file) {
+  .forEach(function (file) {
     var model = sequelize['import'](path.join(__dirname, file));
     db[model.name] = model;
   });
 
-Object.keys(db).forEach(function(modelName) {
+Object.keys(db).forEach(function (modelName) {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }

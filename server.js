@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // Requiring necessary npm packages
 const express = require("express");
 const session = require("express-session");
@@ -30,8 +32,8 @@ require("./routes/api-routes.js")(app);
 require("./routes/atlas-routes")(app);
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(function() {
-  app.listen(PORT, function() {
+db.sequelize.sync().then(function () {
+  app.listen(PORT, function () {
     console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
 });
