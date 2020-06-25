@@ -1,3 +1,3 @@
 module.exports = {
-    atlasID: process.env.atlasID,
+    atlasID: process.env.atlasID
 }
