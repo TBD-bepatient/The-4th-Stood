@@ -63,23 +63,22 @@ $(function () {
                 title: game
             }
         }).then(function (result) {
-            console.log(game);
-            console.log(result[0].min_players)
-            console.log(result[0].min_playtime)
-            console.log(type)
-            console.log(userID)
+            console.log(result);
+
+            // Error is caused when /atlas/info route returns an empty string
+            // Should refactor routes to use unique ID's rather than game titles
             $.ajax("api/new/", {
                 type: "post",
                 data: {
                     name: game,
-                    time: result[0].min_playtime,
-                    players: result[0].min_players,
+                    time: result[0].min_playtime? result[0].min_playtime: null,
+                    playrers: result[0].min_players? result[0].min_players: null,
                     type: type,
                     userID: userID
                 }
             }).then(
                 // location.reload()
-                setInterval('location.reload()', 2000)
+                setInterval('location.reload()', 200)
             );
 
         });
