@@ -32,7 +32,7 @@ $(document).ready(function() {
         window.location.replace("/members");
         // If there's an error, log the error
       })
-      .catch(handleLoginErr);
+      .catch(handleLoginErr());
   }
   function handleLoginErr(err) {
     $("#alert .msg").text("Incorrect user name or password");
